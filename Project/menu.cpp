@@ -1,43 +1,72 @@
 #include <iostream>
+#include <time.h>
 #include <windows.h>
 #include "graphics.h"
-#include "saper.h"
-#include <time.h>
+
 using namespace std;
 
 
-const int N = 16;//--------------------------------поле NxN
-bool pole_mine[N][N];//-------------------------поле с минами
-bool pole_flag[N][N];//--------------------------поле с флажками
-int pole_zero[N][N];
-int kol_mine=40;//--------------------------------колличество мин
-
-void matr(){
-   for (int i=0; i<N; i++){
-      for(int j=0; j<N; j++){
-         pole_mine[i][j]=0;
-         pole_flag[i][j]=0;
-         pole_zero[i][j]=0;
-      }//заполнили массивы
-   }
+bool exit(int a, int b){
+   if (a>833 && a<1231 && b>677 && b<825) return false;
+   return true;
 }
 
+bool next(int a, int b){
+   if (a>833 && a<1231 && b>479 && b<625) return false;
+   else if (a>833 && a<1231 && b>677 && b<825) return false;
+   return true;
+}
 
-
-
-//-----заполнение массивов минами и цифрами----------------------------------------------------------------------------
-void zapol(int  kol_mine){
+//Игра
+void game(){
+   IMAGE * bitmap=loadBMP("Resurses/Fon.jpg");
+   putimage(0,0, bitmap, COPY_PUT);
    int a,b;
-   srand((unsigned int)time(NULL));//для нового рандома
-   for(int i=0; i<kol_mine;){
-      int x = rand()%N;
-      int y = rand()%N;
-      if(pole_mine[x][y]==0){
-         pole_mine[x][y]=1;//присваиваем ячейке мину
-         pole_zero[x][y]=-1;
-         i++;
+   do{
+      while (mousebuttons()!=1){
+         a=mousex();
+         b=mousey();
       }
-   }
+   }while(exit(a,b));
 }
 
 
+int main(){
+   int x=1300, y=900, a, b, kol_mine, u;
+   initwindow(x,y);
+   do{
+      IMAGE * bitmap=loadBMP("Resurses/MENU1.jpg");
+      putimage(0,0, bitmap, COPY_PUT);
+      delay(200);
+      while (mousebuttons()!=1){
+         a=mousex();
+         b=mousey();
+      }
+      if ((b>75 && b<224) && (a>833 && a<1229)) game();//Игра
+      
+      else if ((b>476 && b<625) && (a>833 && a<1229)){//Справка
+         
+         IMAGE * bitmap=loadBMP("Resurses/Spravka.jpg");
+         putimage(0,0, bitmap, COPY_PUT);
+         delay(200);
+         do{
+            while (mousebuttons()!=1){
+               a=mousex();
+               b=mousey();
+            }
+         }while(next(a,b));
+      }
+      else if ((b>276 && b<425) && (a>833 && a<1229)){//Помощь
+         IMAGE * bitmap=loadBMP("Resurses/Pomosh.jpg");
+         putimage(0,0, bitmap, COPY_PUT);
+         delay(200);
+         do{
+            while (mousebuttons()!=1){
+               a=mousex();
+               b=mousey();
+            }
+         }while(next(a,b));
+      }
+   }while(exit(a,b));
+   return 0;
+}

@@ -19,7 +19,7 @@ bool next(int a, int b){
 
 //Игра
 void game(){
-   IMAGE * bitmap=loadBMP("Fon.jpg");
+   IMAGE * bitmap=loadBMP("Resurses/Fon.jpg");
    putimage(0,0, bitmap, COPY_PUT);
    int a,b;
    do{
@@ -35,7 +35,7 @@ int main(){
    int x=1300, y=900, a, b, kol_mine, u;
    initwindow(x,y);
    do{
-      IMAGE * bitmap=loadBMP("MENU1.jpg");
+      IMAGE * bitmap=loadBMP("Resurses/MENU1.jpg");
       putimage(0,0, bitmap, COPY_PUT);
       delay(200);
       while (mousebuttons()!=1){
@@ -46,7 +46,7 @@ int main(){
       
       else if ((b>476 && b<625) && (a>833 && a<1229)){//Справка
          
-         IMAGE * bitmap=loadBMP("Spravka.jpg");
+         IMAGE * bitmap=loadBMP("Resurses/Spravka.jpg");
          putimage(0,0, bitmap, COPY_PUT);
          delay(200);
          do{
@@ -57,7 +57,7 @@ int main(){
          }while(next(a,b));
       }
       else if ((b>276 && b<425) && (a>833 && a<1229)){//Помощь
-         IMAGE * bitmap=loadBMP("Pomosh.jpg");
+         IMAGE * bitmap=loadBMP("Resurses/Pomosh.jpg");
          putimage(0,0, bitmap, COPY_PUT);
          delay(200);
          do{

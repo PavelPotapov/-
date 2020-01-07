@@ -181,3 +181,26 @@ bool shot(int x, int y, int a, int b){
 }
 
 //-------выход--------------------------------------------------------------------------
+void game(){
+   kol_mine=40;
+   IMAGE * bitmap=loadBMP("Fon.jpg");
+   putimage(0,0, bitmap, COPY_PUT);
+   matr();//    созд массивов
+   zapol(kol_mine);// распределение мин на поле
+   pole_cifr();// распределение цифр возле мин
+   
+   int x, y, a, b;
+   do{
+      delay(200);
+      if (kol_mine==0) {
+         IMAGE * bitmap=loadBMP("Pobeda.jpg");
+         putimage(870,0, bitmap, COPY_PUT);
+         getch();
+         break;
+      }
+      while(mousebuttons()!=1 && mousebuttons()!=2){
+         y=(mousex()/50)-1; //50=900/18 в tabl()
+         x=(mousey()/50)-1;
+      }
+   }while(shot(x,y,a,b));
+}
